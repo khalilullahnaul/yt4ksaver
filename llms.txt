@@ -1,0 +1,19 @@
+# yt4ksaver
+
+yt4ksaver is a free, browser-based utility that enables users to download YouTube video and audio content in various resolutions, including 4K and 8K, and formats like MP4 and MP3. It requires no user registration, account creation, or software installation.
+
+## Key Features
+- High-quality video downloading (up to 4K and 8K)
+- High-fidelity audio extraction (MP3 at 320 kbps and 128 kbps)
+- Interactive video trimming and section clipping
+- Automatic YouTube subtitle downloader (SRT format)
+- Automatic HD thumbnail grabber
+- Purely browser-based operation, responsive on both mobile and desktop viewports
+
+## Link Structure
+- [Homepage](https://yt4ksaver.com/) - Main downloader interface and format guide.
+- [FAQ](https://yt4ksaver.com/faq) - Frequently asked questions about usage, quality, and legality.
+- [About Us](https://yt4ksaver.com/about.html) - Project background and mission.
+- [Contact](https://yt4ksaver.com/contact.html) - Customer support and DMCA blocklist contact form.
+- [Privacy Policy](https://yt4ksaver.com/privacy.html) - Data protection, cookie usage, and AdSense disclosures.
+- [Terms of Service](https://yt4ksaver.com/terms.html) - Acceptable usage policy and copyright details.

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yt4ksaver — Free YouTube Video Downloader (MP4 & MP3, 8K)</title>
+    <meta name="description"
+        content="Download YouTube videos free as MP4 or MP3 — up to 4K and 8K quality. No sign-up, no software. Paste a link and download in seconds.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yt4ksaver.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="yt4ksaver — Free YouTube Video Downloader (MP4 & MP3, up to 8K)">
+    <meta property="og:description"
+        content="Free, browser-based YouTube downloader. MP4 and MP3, up to 8K, no sign-up required.">
+    <meta property="og:url" content="https://yt4ksaver.com/">
+    <meta property="og:image" content="https://yt4ksaver.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="yt4ksaver — Free YouTube Video Downloader">
+    <meta name="twitter:description" content="MP4 & MP3, up to 8K. No sign-up, no software.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Schema Markup (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "yt4ksaver",
+          "url": "https://yt4ksaver.com/",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "Any (browser-based)",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Free browser-based tool to download YouTube videos and audio as MP4 or MP3, up to 4K and 8K resolution."
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to Download a YouTube Video with yt4ksaver",
+          "step": [
+            { "@type": "HowToStep", "name": "Copy the link", "text": "Open the video or Short on YouTube and copy its URL." },
+            { "@type": "HowToStep", "name": "Paste it into yt4ksaver", "text": "Paste the link into the download box and click Download." },
+            { "@type": "HowToStep", "name": "Pick your format", "text": "Choose MP4 or MP3 and your preferred quality, then save the file." }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is yt4ksaver free?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. yt4ksaver supports free downloads directly in your browser, with no sign-up or software install." }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need to install anything?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. Downloads run entirely in your browser on desktop or mobile." }
+            },
+            {
+              "@type": "Question",
+              "name": "Is it legal to download YouTube videos?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Downloading may be subject to YouTube's Terms of Service and copyright law. Only save content you own or have permission to use." }
+            },
+            {
+              "@type": "Question",
+              "name": "What's the highest quality available?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Up to 8K, when the original video was uploaded in that resolution." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I download YouTube Shorts?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes, Shorts links work the same way as standard video links." }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="logo" style="text-decoration: none;">
+                <i data-lucide="youtube" style="color: var(--primary-color);"></i>
+                yt4ksaver
+            </a>
+            <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+                <i data-lucide="moon" class="toggle-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero & Downloader -->
+        <section class="hero-section">
+            <div class="container downloader-container">
+                <header class="downloader-header">
+                    <h1>Free YouTube Video Downloader — MP4 & MP3, Up to 8K</h1>
+                    <p>yt4ksaver is a free, browser-based tool for downloading YouTube videos and audio. Paste a public
+                        YouTube link and save it as an MP4 video or MP3 audio file, in resolutions up to 4K and 8K — no
+                        software to install, no account required.</p>
+                </header>
+
+                <section class="downloader-ui">
+                    <div class="video-preview" id="video-preview" style="display: none;">
+                        <img id="thumbnail" src="" alt="YouTube Video Thumbnail">
+                        <div class="video-info">
+                            <span class="ready-badge"><i data-lucide="check-circle-2"></i> Ready</span>
+                            <div class="extra-downloads">
+                                <a href="#" id="download-thumb-btn" target="_blank" class="extra-btn"
+                                    title="Download HD Thumbnail"><i data-lucide="image"></i></a>
+                                <button id="download-sub-btn" class="extra-btn" title="Download Subtitles"><i
+                                        data-lucide="type"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <i data-lucide="link" class="input-icon"></i>
+                        <input type="url" id="url-input" placeholder="Paste YouTube link here..." required
+                            aria-label="YouTube Video URL">
+                    </div>
+
+                    <p
+                        style="font-size: 0.85rem; color: var(--text-secondary); margin-top: -15px; margin-bottom: 25px;">
+                        No sign-up &nbsp;·&nbsp; No install &nbsp;·&nbsp; Works on any device
+                    </p>
+
+                    <div class="trim-section">
+                        <div class="trim-toggle-container">
+                            <label class="switch-label">
+                                <i data-lucide="scissors"></i> Trim Video (Optional)
+                                <div class="switch">
+                                    <input type="checkbox" id="trim-toggle">
+                                    <span class="slider round"></span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="trim-inputs" id="trim-inputs" style="display: none;">
+                            <div class="time-input">
+                                <label for="start-time">Start Time</label>
+                                <input type="text" id="start-time" placeholder="e.g. 01:15">
+                            </div>
+                            <div class="time-input">
+                                <label for="end-time">End Time</label>
+                                <input type="text" id="end-time" placeholder="e.g. 02:30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="options-group">
+                        <button class="option active" data-format="4k"><i data-lucide="monitor-play"></i> 4K MP4</button>
+                        <button class="option" data-format="1080p"><i data-lucide="tv"></i> 1080p MP4</button>
+                        <button class="option" data-format="720p"><i data-lucide="laptop"></i> 720p MP4</button>
+                        <button class="option" data-format="480p"><i data-lucide="smartphone"></i> 480p MP4</button>
+                        <button class="option" data-format="360p"><i data-lucide="smartphone"></i> 360p MP4</button>
+                        <button class="option" data-format="144p"><i data-lucide="film"></i> 144p MP4</button>
+                        <button class="option" data-format="mp3"><i data-lucide="headphones"></i> MP3</button>
+                    </div>
+
+                    <div class="progress-container" id="progress-container" style="display: none;">
+                        <div class="progress-bar" id="progress-bar"></div>
+                        <div class="progress-text" id="progress-text">0%</div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="download-btn" id="download-btn">
+                            <i data-lucide="download"></i>
+                            <span class="btn-text">Paste Link & Download</span>
+                            <div class="spinner" id="spinner"></div>
+                        </button>
+                        <button class="pause-btn" id="pause-btn" style="display: none;" aria-label="Cancel or Pause">
+                            <i data-lucide="square"></i>
+                        </button>
+                    </div>
+
+                    <div class="status" id="status-message"></div>
+                    <p class="tos-text"><i data-lucide="shield-alert"
+                            style="width: 14px; height: 14px; vertical-align: middle; margin-right: 4px;"></i>Only
+                        download videos you own the rights to or have permission to use.</p>
+                </section>
+
+                <!-- Recent Downloads -->
+                <div class="recent-downloads" id="recent-downloads" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3 style="margin-bottom: 0;"><i data-lucide="history"></i> Recent Downloads</h3>
+                        <button id="clear-history-btn" class="clear-history-btn" title="Clear Download History">
+                            <i data-lucide="trash-2" style="width: 14px; height: 14px; vertical-align: middle;"></i> Clear
+                        </button>
+                    </div>
+                    <ul id="recent-list" class="recent-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="seo-content container">
+            <article class="seo-article">
+                <h2>How to Download a YouTube Video with yt4ksaver</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <img src="step-copy.webp" alt="Step 1: Copy YouTube link from address bar or share button"
+                            width="500" height="500" loading="lazy" class="step-img">
+                        <div class="step-number">1</div>
+                        <h3>Copy the link</h3>
+                        <p>Open the video or Short you want on YouTube and copy its URL from the address bar or the
+                            Share button.</p>
+                    </div>
+                    <div class="step-card">
+                        <img src="step-paste.webp" alt="Step 2: Paste URL link into yt4ksaver downloader input"
+                            width="500" height="500" loading="lazy" class="step-img">
+                        <div class="step-number">2</div>
+                        <h3>Paste it into yt4ksaver</h3>
+                        <p>Drop the link into the box above and hit Download.</p>
+                    </div>
+                    <div class="step-card">
+                        <img src="step-download.webp" alt="Step 3: Select format and download in 4K MP4 or MP3"
+                            width="500" height="500" loading="lazy" class="step-img">
+                        <div class="step-number">3</div>
+                        <h3>Pick your format</h3>
+                        <p>Choose MP4 (video) or MP3 (audio) and your preferred quality, then save the file to your
+                            device.</p>
+                    </div>
+                </div>
+
+                <h2>Which YouTube Links Work with yt4ksaver</h2>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <h3>Works with:</h3>
+                        <ul>
+                            <li><strong>Standard videos</strong> — <code>youtube.com/watch?v=VIDEO_ID</code></li>
+                            <li><strong>YouTube Shorts</strong> — <code>youtube.com/shorts/VIDEO_ID</code></li>
+                            <li><strong>Short links</strong> — <code>youtu.be/VIDEO_ID</code></li>
+                            <li><strong>YouTube Music</strong> — <code>music.youtube.com/watch?v=VIDEO_ID</code></li>
+                            <li><strong>Embed links</strong> — <code>youtube.com/embed/VIDEO_ID</code></li>
+                        </ul>
+                    </div>
+                    <div class="benefit">
+                        <h3>Doesn't work with:</h3>
+                        <ul>
+                            <li><strong>Private or members-only videos</strong></li>
+                            <li><strong>Paid, rented, or DRM-protected content</strong></li>
+                            <li><strong>Live streams that are still in progress</strong></li>
+                            <li><strong>Playlist or full channel pages</strong> — open the specific video and use its
+                                individual link</li>
+                            <li><strong>Deleted, invalid, or unavailable video URLs</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>YouTube Download Formats and Quality Options</h2>
+                <p><em>Estimates below are based on a 5-minute video; your file size will vary with length and
+                        content.</em></p>
+
+                <h3>MP3 (Audio)</h3>
+                <div class="table-container">
+                    <table class="seo-table">
+                        <thead>
+                            <tr>
+                                <th>Format</th>
+                                <th>Quality</th>
+                                <th>Est. Size</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MP3</td>
+                                <td>128 kbps</td>
+                                <td>~4–5 MB</td>
+                                <td>Podcasts, voice notes, smaller files</td>
+                            </tr>
+                            <tr>
+                                <td>MP3</td>
+                                <td>320 kbps</td>
+                                <td>~11–12 MB</td>
+                                <td>Music and higher-fidelity listening</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>MP4 (Video)</h3>
+                <div class="table-container">
+                    <table class="seo-table">
+                        <thead>
+                            <tr>
+                                <th>Format</th>
+                                <th>Quality</th>
+                                <th>Est. Size</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MP4</td>
+                                <td>360p–480p</td>
+                                <td>~15–25 MB</td>
+                                <td>Slow connections, small screens</td>
+                            </tr>
+                            <tr>
+                                <td>MP4</td>
+                                <td>720p</td>
+                                <td>~35–40 MB</td>
+                                <td>Phones, tablets, everyday playback</td>
+                            </tr>
+                            <tr>
+                                <td>MP4</td>
+                                <td>1080p</td>
+                                <td>~120–140 MB</td>
+                                <td>Laptops, presentations</td>
+                            </tr>
+                            <tr>
+                                <td>MP4</td>
+                                <td>2K</td>
+                                <td>~250–550 MB</td>
+                                <td>High-res screens, editing</td>
+                            </tr>
+                            <tr>
+                                <td>MP4</td>
+                                <td>4K–8K</td>
+                                <td>~550 MB–3 GB+</td>
+                                <td>Large displays, archiving, professional editing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><em>Note: available quality depends on what the original YouTube upload provides. 4K/8K only appear
+                        when the source video was uploaded in that resolution.</em></p>
+
+                <h2>Why Choose yt4ksaver</h2>
+                <div class="feature-split">
+                    <div class="feature-split-content">
+                        <ul>
+                            <li><strong>Built on an actively maintained extraction engine.</strong> yt4ksaver runs on a
+                                backend that's updated frequently to keep pace with YouTube's changes — which means
+                                fewer "link not supported" errors over time compared to tools running on stale,
+                                unmaintained scrapers.</li>
+                            <li><strong>Real 4K and 8K support.</strong> When the source video is available in high
+                                resolution, yt4ksaver will offer it — no artificial quality caps.</li>
+                            <li><strong>No account, no install.</strong> Paste a link and go. Nothing to download except
+                                the file you actually want.</li>
+                            <li><strong>No fake download buttons, no forced redirects</strong> — just the tool you asked
+                                for.</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-img-container">
+                        <img src="feature-quality.webp"
+                            alt="High Resolution support: Download videos in Full HD 1080p, Ultra HD 4K, and 8K resolutions"
+                            width="600" height="600" loading="lazy" class="feature-img">
+                    </div>
+                </div>
+
+                <h2>More Than Just Downloads</h2>
+                <div class="feature-split">
+                    <div class="feature-split-content">
+                        <ul>
+                            <li><strong>Thumbnail downloader</strong> — save YouTube thumbnails as JPG, up to 1280×720.
+                            </li>
+                            <li><strong>Subtitle downloader</strong> — save available subtitles as SRT, VTT, or plain
+                                TXT.</li>
+                            <li><strong>Clip trimmer</strong> — select a start and end point and export just that
+                                segment as MP4 or MP3.</li>
+                        </ul>
+                    </div>
+                    <div class="feature-split-img-container">
+                        <img src="feature-trimming.webp"
+                            alt="Advanced tools: Video Trimming, Thumbnail detection, and Subtitle extraction"
+                            width="600" height="600" loading="lazy" class="feature-img">
+                    </div>
+                </div>
+
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-section">
+                    <details>
+                        <summary>Is yt4ksaver free?</summary>
+                        <p>Yes. yt4ksaver supports free downloads directly in your browser, with no sign-up or software
+                            install.</p>
+                    </details>
+                    <details>
+                        <summary>Do I need to install anything?</summary>
+                        <p>No. Downloads run entirely in your browser on desktop or mobile.</p>
+                    </details>
+                    <details>
+                        <summary>Is it legal to download YouTube videos?</summary>
+                        <p>Downloading YouTube videos may be subject to YouTube's Terms of Service and copyright law.
+                            Only save content you own, have permission to use, or are otherwise legally allowed to keep.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>What's the highest quality available?</summary>
+                        <p>Up to 8K, when the original YouTube video was uploaded in that resolution. If the source
+                            doesn't offer 4K or 8K, those options won't appear.</p>
+                    </details>
+                    <details>
+                        <summary>Can I download YouTube Shorts?</summary>
+                        <p>Yes — paste the Shorts link the same way you would a standard video link.</p>
+                    </details>
+                    <details>
+                        <summary>Why is there no sound in my downloaded file?</summary>
+                        <p>You likely downloaded a video-only version. Check for a muted-speaker icon next to the
+                            quality option and choose a version with audio, or download the MP3 separately.</p>
+                    </details>
+                    <details>
+                        <summary>Do you support playlists or full channels?</summary>
+                        <p>Not yet. Open the specific video you want from the playlist or channel and use its individual
+                            link.</p>
+                    </details>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-secondary);"><em>Last updated: {{
+                        last_updated }}</em></p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="/about.html">About Us</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms of Service</a>
+            </div>
+            <p>&copy; 2026 yt4ksaver. All rights reserved. Made by Muhammad Aoun Yousaf Naul From Pakkay Wala Jhang</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
