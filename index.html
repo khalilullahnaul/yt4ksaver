@@ -160,14 +160,32 @@
                         </div>
                     </div>
 
-                    <div class="options-group">
-                        <button class="option active" data-format="4k"><i data-lucide="monitor-play"></i> 4K MP4</button>
-                        <button class="option" data-format="1080p"><i data-lucide="tv"></i> 1080p MP4</button>
-                        <button class="option" data-format="720p"><i data-lucide="laptop"></i> 720p MP4</button>
-                        <button class="option" data-format="480p"><i data-lucide="smartphone"></i> 480p MP4</button>
-                        <button class="option" data-format="360p"><i data-lucide="smartphone"></i> 360p MP4</button>
-                        <button class="option" data-format="144p"><i data-lucide="film"></i> 144p MP4</button>
-                        <button class="option" data-format="mp3"><i data-lucide="headphones"></i> MP3</button>
+                    <!-- Tabs for Format Selection -->
+                    <div class="tabs-container">
+                        <button type="button" class="tab-btn active" id="tab-video-btn"><i data-lucide="video"></i> Video (MP4)</button>
+                        <button type="button" class="tab-btn" id="tab-audio-btn"><i data-lucide="music"></i> Audio (MP3)</button>
+                    </div>
+
+                    <!-- Video Formats -->
+                    <div class="options-pane" id="pane-video">
+                        <div class="options-grid">
+                            <button class="option active" data-format="4k"><i data-lucide="monitor-play"></i> 4K Ultra HD <span class="format-badge">2160p</span></button>
+                            <button class="option" data-format="1080p"><i data-lucide="tv"></i> Full HD <span class="format-badge">1080p</span></button>
+                            <button class="option" data-format="720p"><i data-lucide="laptop"></i> HD Quality <span class="format-badge">720p</span></button>
+                            <button class="option" data-format="480p"><i data-lucide="smartphone"></i> Standard <span class="format-badge">480p</span></button>
+                            <button class="option" data-format="360p"><i data-lucide="smartphone"></i> Medium <span class="format-badge">360p</span></button>
+                            <button class="option" data-format="144p"><i data-lucide="film"></i> Mini <span class="format-badge">144p</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Audio Formats -->
+                    <div class="options-pane" id="pane-audio" style="display: none;">
+                        <div class="options-grid">
+                            <button class="option" data-format="mp3-320"><i data-lucide="headphones"></i> Hi-Fi Audio <span class="format-badge">320kbps</span></button>
+                            <button class="option" data-format="mp3-256"><i data-lucide="headphones"></i> High Quality <span class="format-badge">256kbps</span></button>
+                            <button class="option" data-format="mp3-192"><i data-lucide="headphones"></i> Standard <span class="format-badge">192kbps</span></button>
+                            <button class="option" data-format="mp3-128"><i data-lucide="headphones"></i> Low Space <span class="format-badge">128kbps</span></button>
+                        </div>
                     </div>
 
                     <div class="progress-container" id="progress-container" style="display: none;">

@@ -82,6 +82,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // --- Tab Switching Logic ---
+        const tabVideoBtn = document.getElementById('tab-video-btn');
+        const tabAudioBtn = document.getElementById('tab-audio-btn');
+        const paneVideo = document.getElementById('pane-video');
+        const paneAudio = document.getElementById('pane-audio');
+
+        if (tabVideoBtn && tabAudioBtn && paneVideo && paneAudio) {
+            tabVideoBtn.addEventListener('click', () => {
+                tabVideoBtn.classList.add('active');
+                tabAudioBtn.classList.remove('active');
+                paneVideo.style.display = 'block';
+                paneAudio.style.display = 'none';
+
+                // Set first video option as active and update selectedFormat
+                const firstVideoOpt = paneVideo.querySelector('.option');
+                if (firstVideoOpt) {
+                    options.forEach(opt => opt.classList.remove('active'));
+                    firstVideoOpt.classList.add('active');
+                    selectedFormat = firstVideoOpt.getAttribute('data-format');
+                }
+            });
+
+            tabAudioBtn.addEventListener('click', () => {
+                tabAudioBtn.classList.add('active');
+                tabVideoBtn.classList.remove('active');
+                paneAudio.style.display = 'block';
+                paneVideo.style.display = 'none';
+
+                // Set first audio option as active and update selectedFormat
+                const firstAudioOpt = paneAudio.querySelector('.option');
+                if (firstAudioOpt) {
+                    options.forEach(opt => opt.classList.remove('active'));
+                    firstAudioOpt.classList.add('active');
+                    selectedFormat = firstAudioOpt.getAttribute('data-format');
+                }
+            });
+        }
+
         // --- Option Selection ---
         options.forEach(option => {
             option.addEventListener('click', () => {

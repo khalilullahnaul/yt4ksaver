@@ -122,12 +122,13 @@ def download_worker(task_id, url, format_type, start_time, end_time):
     elif format_type == '144p':
         ydl_opts['format'] = 'bestvideo[height<=144]+bestaudio/best[height<=144]'
         ydl_opts['merge_output_format'] = 'mp4'
-    elif format_type == 'mp3':
+    elif format_type == 'mp3' or format_type.startswith('mp3-'):
+        quality = '320' if format_type == 'mp3' else format_type.split('-')[1]
         ydl_opts['format'] = 'bestaudio/best'
         ydl_opts['postprocessors'] = [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
-            'preferredquality': '192',
+            'preferredquality': quality,
         }]
     elif format_type == 'subtitle':
         ydl_opts['writesubtitles'] = True
@@ -161,7 +162,7 @@ def download_worker(task_id, url, format_type, start_time, end_time):
                     return
 
             downloaded_file = ydl.prepare_filename(info_dict)
-            if format_type == 'mp3':
+            if format_type == 'mp3' or format_type.startswith('mp3-'):
                 downloaded_file = os.path.splitext(downloaded_file)[0] + '.mp3'
             
             if not os.path.exists(downloaded_file):

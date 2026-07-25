@@ -292,20 +292,62 @@ input:checked + .slider:before {
 }
 .time-input input:focus { border-color: var(--primary-color); }
 
-.options-group {
+/* Tabs Redesign */
+.tabs-container {
+    display: flex;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 6px;
+    margin-bottom: 25px;
+    gap: 5px;
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: none;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.95rem;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background: var(--bg-main);
+    color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
     margin-bottom: 30px;
 }
 
+.options-pane {
+    transition: all 0.3s ease;
+}
+
 .option {
-    padding: 12px 8px;
+    padding: 14px 10px;
     background: var(--bg-main);
     border: 2px solid var(--border-color);
-    border-radius: 14px;
+    border-radius: 18px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     font-weight: 600;
     font-size: 0.85rem;
     color: var(--text-secondary);
@@ -332,6 +374,22 @@ input:checked + .slider:before {
 
 .option.active .lucide, .option:hover .lucide {
     color: var(--primary-color);
+}
+
+.format-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    background: rgba(93, 62, 248, 0.08);
+    border-radius: 6px;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-top: 4px;
+    transition: all 0.2s ease;
+}
+
+.option.active .format-badge {
+    background: var(--primary-color);
+    color: #ffffff;
 }
 
 .action-buttons {
@@ -804,8 +862,8 @@ body.light-mode .pause-btn {
         flex-direction: column;
         gap: 10px;
     }
-    .options-group {
-        grid-template-columns: repeat(3, 1fr);
+    .options-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
     .seo-article h2 {
