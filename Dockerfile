@@ -16,8 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application files
 COPY . .
 
-# Default port for Koyeb is 8000
-ENV PORT=8000
+# Default port for Hugging Face is 7860
+ENV PORT=7860
 EXPOSE $PORT
 
 # Run with Gunicorn (using shell form so $PORT is evaluated)
