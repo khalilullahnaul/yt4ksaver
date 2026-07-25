@@ -211,6 +211,16 @@ def faq():
     content = content.replace('{{ last_updated }}', last_updated_str)
     return Response(content, mimetype='text/html')
 
+@app.route('/blog')
+@app.route('/blog.html')
+def blog():
+    try:
+        with open('blog.html', 'r', encoding='utf-8') as f:
+            content = f.read()
+        return Response(content, mimetype='text/html')
+    except:
+        return "Blog listing page not found", 404
+
 @app.route('/robots.txt')
 def serve_robots():
     return send_file('robots.txt', mimetype='text/plain')

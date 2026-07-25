@@ -35,18 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let eventSource = null;
     let currentTaskId = null;
 
-    // --- Dark Mode (Global) ---
+    // --- Theme Management (Default: Dark Mode) ---
     if (darkModeToggle) {
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
+        const isLightThemeSaved = localStorage.getItem('theme') === 'light';
+        if (isLightThemeSaved) {
+            document.body.classList.add('light-mode');
+            darkModeToggle.innerHTML = '<i data-lucide="moon" class="toggle-icon"></i>';
+        } else {
             darkModeToggle.innerHTML = '<i data-lucide="sun" class="toggle-icon"></i>';
-            lucide.createIcons();
         }
+        lucide.createIcons();
+
         darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            darkModeToggle.innerHTML = isDark ? '<i data-lucide="sun" class="toggle-icon"></i>' : '<i data-lucide="moon" class="toggle-icon"></i>';
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            darkModeToggle.innerHTML = isLight ? 
+                '<i data-lucide="moon" class="toggle-icon"></i>' : 
+                '<i data-lucide="sun" class="toggle-icon"></i>';
             lucide.createIcons();
         });
     }
