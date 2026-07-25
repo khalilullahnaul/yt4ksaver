@@ -2,22 +2,34 @@ export async function onRequest(context) {
     const url = new URL(context.request.url);
     const path = url.pathname;
     
-    // Define the Hugging Face Space hostname
-    // You can change this if your Space name or username is different
-    const hfHost = 'khalilullahnaul-yt4ksaver.hf.space';
+    // Retrieve the backend URL from Cloudflare Pages Environment Variables
+    // Example: BACKEND_API_URL = "https://api.yt4ksaver.com"
+    const backendUrlString = context.env.BACKEND_API_URL || "https://khalilullahnaul-yt4ksaver.hf.space";
     
-    // 1. If it's a download file request, redirect directly to Hugging Face
+    let backendUrl;
+    try {
+        backendUrl = new URL(backendUrlString);
+    } catch (e) {
+        return new Response(JSON.stringify({ error: "Invalid BACKEND_API_URL environment variable configuration" }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" }
+        });
+    }
+    
+    const backendHost = backendUrl.host;
+    
+    // 1. If it's a download file request, redirect directly to the backend
     // This saves Cloudflare worker limits and streams directly at maximum speed
     if (path.startsWith('/api/file/')) {
-        return Response.redirect(`https://${hfHost}${path}${url.search}`, 302);
+        return Response.redirect(`${backendUrl.origin}${path}${url.search}`, 302);
     }
     
     // 2. For other API requests (like /api/download or /api/progress/*), proxy the request
-    const targetUrl = `https://${hfHost}${path}${url.search}`;
+    const targetUrl = `${backendUrl.origin}${path}${url.search}`;
     
-    // Clone headers and overwrite the Host header to match Hugging Face
+    // Clone headers and overwrite the Host header to match the backend domain
     const newHeaders = new Headers(context.request.headers);
-    newHeaders.set('Host', hfHost);
+    newHeaders.set('Host', backendHost);
     
     const requestOptions = {
         method: context.request.method,
